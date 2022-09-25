@@ -1,0 +1,17 @@
+{
+    "name": "ejemplo/proyecto",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "EdrianOrtega",
+            "email": "inuyasha09889@gmail.com"
+        }
+    ],
+    "require": {}, 
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes"
+        }
+    }
+}
