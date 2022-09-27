@@ -5,7 +5,7 @@
 
     // Autenticar el usuario 
 
-    $errores = []; 
+    $errores = [];  
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // echo "<pre>"; 

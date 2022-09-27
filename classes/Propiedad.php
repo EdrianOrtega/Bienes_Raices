@@ -7,6 +7,9 @@ class Propiedad {
     // Base de Datos 
     protected static $db; 
     protected static $columnas_DB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId']; // Crear arreglo de columnas 
+
+    // Errores 
+    protected static $errores = []; 
     
     public $id; 
     public $titulo; 
@@ -26,16 +29,16 @@ class Propiedad {
 
     public function __construct($args = []) 
     {
-        $this->id = $args ['id'] ?? ''; 
-        $this->titulo = $args ['titulo'] ?? ''; 
-        $this->precio = $args ['precio'] ?? ''; 
-        $this->imagen = $args ['imagen'] ?? 'imagen.jpg'; 
-        $this->descripcion = $args ['descripcion'] ?? ''; 
-        $this->habitaciones = $args ['habitaciones'] ?? ''; 
-        $this->wc = $args ['wc'] ?? ''; 
-        $this->estacionamiento = $args ['estacionamiento'] ?? ''; 
+        $this->id = $args['id'] ?? ''; 
+        $this->titulo = $args['titulo'] ?? ''; 
+        $this->precio = $args['precio'] ?? ''; 
+        $this->imagen = $args['imagen'] ?? ''; 
+        $this->descripcion = $args['descripcion'] ?? ''; 
+        $this->habitaciones = $args['habitaciones'] ?? ''; 
+        $this->wc = $args['wc'] ?? ''; 
+        $this->estacionamiento = $args['estacionamiento'] ?? ''; 
         $this->creado = date('Y/m/d'); 
-        $this->vendedorId = $args ['vendedorId'] ?? ''; 
+        $this->vendedorId = $args['vendedorId'] ?? ''; 
     }
 
     public function guardar() {
@@ -52,7 +55,7 @@ class Propiedad {
         
         $resultado = self::$db->query($query); 
 
-        debuguear($resultado); 
+        return $resultado; 
     }
 
     // Identificar y unir los atributos de la BD
@@ -73,6 +76,55 @@ class Propiedad {
         }
 
         return $sanitizado; // los retornamos nuestros datos ya sanitizados 
+    }
+    // Subida de Archivos 
+    public function setImagen($imagen) { // set es para modificar un valor 
+        // Asignar al atributo de imagen el nombre de la imagen 
+        if($imagen) {
+            $this->imagen = $imagen; 
+        }
+    }
+
+    // Validación 
+    public static function getErrores() { // get es para obtener un valor
+        return self::$errores; 
+    }
+
+    public function validar() {
+        
+        if(!$this->titulo) {
+            self::$errores[] = "Debes añadir un Titulo"; 
+        }
+
+        if(!$this->precio) {
+            self::$errores[] = "El Precio es Obligatorio"; 
+        }
+
+        if( strlen( $this->descripcion ) < 50 ) {
+            $errores[] = "La Descripcion es Obligatoria y Debe tener al menos 50 Caracteres"; 
+        }
+
+        if(!$this->habitaciones) {
+            self::$errores[] = "El número de Habitaciones es Obligatorio"; 
+        }
+
+        if(!$this->wc) {
+            self::$errores[] = "El número de Baños es Obligatorio"; 
+        }
+
+        if(!$this->estacionamiento) {
+            self::$errores[] = "El Número de Lugares de Estacionamiento es Obligatorio"; 
+        }
+
+        if(!$this->vendedorId) {
+            self::$errores[] = "Elige un vendedor"; 
+        }
+
+        if(!$this->imagen) { 
+            self::$errores[] = 'La Imagen es Obligatoria'; 
+        }
+
+        return self::$errores; 
     }
 
 

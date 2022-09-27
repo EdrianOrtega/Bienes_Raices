@@ -1,8 +1,9 @@
 <?php 
 
 
-define('TEMPLATES_URL', __DIR__ . '/templates'); 
-define('FUNCIONES_URL', __DIR__ . 'funciones.php'); 
+define('TEMPLATES_URL', __DIR__ . '/templates'); // constante 
+define('FUNCIONES_URL', __DIR__ . 'funciones.php'); // constante 
+define('CARPETA_IMAGENES', __DIR__ . '/../imagenes/'); // constante 
 
 function incluirTemplate( string $nombre, bool $inicio = false ) {
     include TEMPLATES_URL . "/${nombre}.php"; 

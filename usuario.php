@@ -1,7 +1,6 @@
 <?php 
 
 // Importar la conexión 
-// Incluye el header 
 require 'includes/app.php'; 
 
 $db = conectarDB(); 
@@ -9,6 +8,7 @@ $db = conectarDB();
 // Crear un e-mail y un password 
 $email = "correo@correo.com"; 
 $password = "123456"; 
+
 $passwordHash = password_hash($password, PASSWORD_BCRYPT); 
 
 
