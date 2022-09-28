@@ -31,7 +31,6 @@
         $propiedad = new Propiedad($_POST); 
 
         /** SUBIDA DE ARCHIVOS */
-        
 
         // Generar un Nombre Único 
         $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg"; 
