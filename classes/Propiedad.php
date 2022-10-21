@@ -38,7 +38,7 @@ class Propiedad {
         $this->wc = $args['wc'] ?? ''; 
         $this->estacionamiento = $args['estacionamiento'] ?? ''; 
         $this->creado = date('Y/m/d'); 
-        $this->vendedorId = $args['vendedorId'] ?? ''; 
+        $this->vendedorId = $args['vendedorId'] ?? 1; 
     }
 
     public function guardar() {
@@ -74,7 +74,6 @@ class Propiedad {
         foreach($atributos as $key => $value ) {
             $sanitizado[$key] = self::$db->escape_string($value); // vamos sanitizando nuestros datos 
         }
-
         return $sanitizado; // los retornamos nuestros datos ya sanitizados 
     }
     // Subida de Archivos 
