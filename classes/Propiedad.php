@@ -174,5 +174,14 @@ class Propiedad {
     }
 
 
+    // Sincronizar el objeto en memoria con los cambios realizados por el usuario 
+    public function sincronizar( $args = [] ) {
+        foreach($args as $key => $value) {
+            if(property_exists($this, $key ) && !is_null($value)) {
+                $this->$key = $value; 
+            }
+        }
+    }
+
 }
 

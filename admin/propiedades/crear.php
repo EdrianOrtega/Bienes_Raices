@@ -22,7 +22,7 @@
     if( $_SERVER['REQUEST_METHOD'] === 'POST' ) { 
         
         /** Crea una nueva instancia  **/ 
-        $propiedad = new Propiedad($_POST); 
+        $propiedad = new Propiedad($_POST['propiedad']); 
 
         /** SUBIDA DE ARCHIVOS */
 
@@ -31,8 +31,8 @@
 
         // Setear la imagen 
         // Realizar un resize a la imagen con intervation 
-        if($_FILES['imagen']['tmp_name']) {
-            $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800,600); 
+        if($_FILES['propiedad']['tmp_name']['imagen']) {
+            $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600); 
             $propiedad->setImagen($nombreImagen); 
         }
 
