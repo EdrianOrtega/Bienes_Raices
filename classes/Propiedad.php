@@ -78,6 +78,16 @@ class Propiedad {
     }
     // Subida de Archivos 
     public function setImagen($imagen) { // set es para modificar un valor 
+        
+        // Elimina la imagen previa 
+        if($this->id) {
+            // Comprobar si existe el archhivo 
+            $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen); 
+            if($existeArchivo) {
+                unlink(CARPETA_IMAGENES . $this->imagen); 
+            }
+        }
+
         // Asignar al atributo de imagen el nombre de la imagen 
         if($imagen) {
             $this->imagen = $imagen; 
