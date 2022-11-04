@@ -45,33 +45,13 @@ use Intervention\Image\ImageManagerStatic as Image;
             $propiedad->setImagen($nombreImagen); 
         }
 
-        debuguear($propiedad); 
-
-
         if( empty($errores) ) {
+            // Almacenar la imagen 
+            $image->save(CARPETA_IMAGENES . $nombreImagen); 
 
-            
-
-            exit; 
-
-            // Insertar en la base de datos 
-            $query = " UPDATE propiedades SET titulo = '${titulo}', precio = '${precio}', imagen = '${nombreImagen}', descripcion = '${descripcion}', habitaciones = ${habitaciones}, wc = ${wc}, estacionamiento = ${estacionamiento}, vendedorId = ${vendedorId} WHERE id = ${id} "; 
-
-            // echo $query; 
-            
-            $resultado = mysqli_query($db, $query); 
-
-            if($resultado) {
-                // Redireccionar al usuario 
-                header('Location: /admin?resultado=2'); 
-            }
+            $propiedad->guardar(); 
         }
-
-        
     }
-
-
-
 
     incluirTemplate('header'); 
 ?>
