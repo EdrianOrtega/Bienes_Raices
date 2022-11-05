@@ -50,16 +50,10 @@
             $image->save(CARPETA_IMAGENES . $nombreImagen); 
 
             // Guarda en la base de datos 
-            $resultado = $propiedad->guardar(); 
+            $propiedad->guardar(); 
 
-            // Mensaje de exito 
-            if($resultado) {
-                // Redireccionar al usuario 
-                header('Location: /admin?resultado=1'); 
-            }
         }
 
-        
     }
 
 
@@ -71,8 +65,6 @@
 
     <main class="contenedor seccion"> 
         <h1> Crear </h1> 
-
-
 
         <a href="/admin" class="boton boton-verde"> Volver </a> 
 
