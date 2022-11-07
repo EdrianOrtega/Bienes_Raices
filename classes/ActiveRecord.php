@@ -124,44 +124,13 @@ class ActiveRecord {
 
     // Validación 
     public static function getErrores() { // get es para obtener un valor
-        return self::$errores; 
+        
+        return static::$errores; 
     }
 
     public function validar() {
-        
-        if(!$this->titulo) {
-            self::$errores[] = "Debes añadir un Titulo"; 
-        }
-
-        if(!$this->precio) {
-            self::$errores[] = "El Precio es Obligatorio"; 
-        }
-
-        if( strlen( $this->descripcion ) < 50 ) {
-            $errores[] = "La Descripcion es Obligatoria y Debe tener al menos 50 Caracteres"; 
-        }
-
-        if(!$this->habitaciones) {
-            self::$errores[] = "El número de Habitaciones es Obligatorio"; 
-        }
-
-        if(!$this->wc) {
-            self::$errores[] = "El número de Baños es Obligatorio"; 
-        }
-
-        if(!$this->estacionamiento) {
-            self::$errores[] = "El Número de Lugares de Estacionamiento es Obligatorio"; 
-        }
-
-        if(!$this->vendedorId) {
-            self::$errores[] = "Elige un vendedor"; 
-        }
-
-        if(!$this->imagen) { 
-            self::$errores[] = 'La Imagen es Obligatoria'; 
-        }
-
-        return self::$errores; 
+        static::$errores = []; 
+        return static::$errores; 
     }
 
     // Lista todos los registros 
