@@ -3,16 +3,22 @@
 namespace App; 
 
 class Vendedor extends ActiveRecord {
-
     
+    protected static $tabla = 'vendedores'; 
 
-    // Lista todos los registros 
-    public static function all() {
-        $query = "SELECT * FROM vendedores"; 
+    protected static $columnas_DB = ['id', 'nombre', 'apellido', 'telefono']; // Crear arreglo de columnas 
 
-        $resultado = self::consultarSQL($query);
+    public $id; 
+    public $nombre; 
+    public $apellido; 
+    public $telefono; 
 
-        return $resultado; 
+    public function __construct($args = []) 
+    {
+        $this->id = $args['id'] ?? null; 
+        $this->nombre = $args['nombre'] ?? ''; 
+        $this->apellido = $args['apellido'] ?? ''; 
+        $this->telefono = $args['telefono'] ?? ''; 
     }
 }
 

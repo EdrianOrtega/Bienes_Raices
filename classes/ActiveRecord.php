@@ -5,39 +5,15 @@ namespace App;
 class ActiveRecord {
     // Base de Datos 
     protected static $db; 
-    protected static $columnas_DB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId']; // Crear arreglo de columnas 
+    protected static $columnas_DB = []; // Crear arreglo de columnas 
+    protected static $tabla = ''; 
 
     // Errores 
     protected static $errores = []; 
 
-    public $id; 
-    public $titulo; 
-    public $precio; 
-    public $imagen; 
-    public $descripcion; 
-    public $habitaciones; 
-    public $wc; 
-    public $estacionamiento; 
-    public $creado; 
-    public $vendedorId; 
-
     // Definir la conexión a la base de datos 
     public static function setDB($database) {
         self::$db = $database; 
-    }
-
-    public function __construct($args = []) 
-    {
-        $this->id = $args['id'] ?? null; 
-        $this->titulo = $args['titulo'] ?? ''; 
-        $this->precio = $args['precio'] ?? ''; 
-        $this->imagen = $args['imagen'] ?? ''; 
-        $this->descripcion = $args['descripcion'] ?? ''; 
-        $this->habitaciones = $args['habitaciones'] ?? ''; 
-        $this->wc = $args['wc'] ?? ''; 
-        $this->estacionamiento = $args['estacionamiento'] ?? ''; 
-        $this->creado = date('Y/m/d'); 
-        $this->vendedorId = $args['vendedorId'] ?? 1; 
     }
 
     public function guardar() {
@@ -56,7 +32,7 @@ class ActiveRecord {
         $atributos = $this->sanitizarAtributos(); 
 
         // Insertar en la base de datos 
-        $query = " INSERT INTO propiedades ( ";
+        $query = " INSERT INTO " . static::$tabla . " ( ";
         $query .= join(', ', array_keys($atributos)); 
         $query .= " ) VALUES (' "; 
         $query .= join("', '", array_values($atributos)); 
@@ -80,7 +56,7 @@ class ActiveRecord {
             $valores[] = "{$key}='{$value}'"; 
         }
 
-        $query = " UPDATE propiedades SET ";
+        $query = " UPDATE " . static::$tabla . " SET ";
         $query .= join(', ', $valores); 
         $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' "; 
         $query .= " LIMIT 1 "; 
@@ -95,9 +71,8 @@ class ActiveRecord {
 
 
     // Eliminar un registro 
-    public function eliminar() {
-        // Eliminar la propiedad
-        $query = "DELETE FROM propiedades WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1"; 
+    public function eliminar() { 
+        $query = "DELETE FROM " . static::$tabla . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1"; 
         $resultado = self::$db->query($query); 
 
         if($resultado) {
@@ -191,7 +166,7 @@ class ActiveRecord {
 
     // Lista todos los registros 
     public static function all() {
-        $query = "SELECT * FROM propiedades"; 
+        $query = "SELECT * FROM " . static::$tabla; 
 
         $resultado = self::consultarSQL($query);
 
@@ -200,7 +175,7 @@ class ActiveRecord {
 
     // Busca un registro por su id 
     public static function find($id) {
-        $query = "SELECT * FROM propiedades WHERE id = ${id}"; 
+        $query = "SELECT * FROM " . static::$tabla . " WHERE id = ${id}"; 
 
         $resultado = self::consultarSQL($query); 
 
@@ -225,7 +200,7 @@ class ActiveRecord {
     }
 
     protected static function crearObjeto($registro) {
-        $objeto = new self; 
+        $objeto = new static; 
 
         foreach($registro as $key => $value ) {
             if( property_exists( $objeto, $key ) ) {
