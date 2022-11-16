@@ -5,8 +5,7 @@ namespace App;
 class Vendedor extends ActiveRecord {
     
     protected static $tabla = 'vendedores'; 
-
-    protected static $columnas_DB = ['id', 'nombre', 'apellido', 'telefono']; // Crear arreglo de columnas 
+    protected static $columnasDB = ['id', 'nombre', 'apellido', 'telefono']; // Crear arreglo de columnas 
 
     public $id; 
     public $nombre; 

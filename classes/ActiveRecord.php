@@ -5,7 +5,7 @@ namespace App;
 class ActiveRecord {
     // Base de Datos 
     protected static $db; 
-    protected static $columnas_DB = []; // Crear arreglo de columnas 
+    protected static $columnasDB = []; // Crear arreglo de columnas 
     protected static $tabla = ''; 
 
     // Errores 
@@ -84,7 +84,7 @@ class ActiveRecord {
     // Identificar y unir los atributos de la BD
     public function atributos() { 
         $atributos = []; 
-        foreach(static::$columnas_DB as $columna) {
+        foreach(static::$columnasDB as $columna) {
             if($columna === 'id') continue; 
             $atributos[$columna] = $this->$columna; 
         } 
