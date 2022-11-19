@@ -6,7 +6,7 @@ class Propiedad extends ActiveRecord {
     
     protected static $tabla = 'propiedades'; 
 
-    protected static $columnas_DB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId']; // Crear arreglo de columnas 
+    protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId']; // Crear arreglo de columnas 
 
     public $id; 
     public $titulo; 
