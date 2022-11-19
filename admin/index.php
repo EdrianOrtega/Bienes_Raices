@@ -47,11 +47,11 @@
     <main class="contenedor seccion"> 
         <h1> Administrador de Bienes Raices </h1> 
         <?php if( intval( $resultado ) === 1): ?> 
-            <p class="alerta exito"> Anuncio Creado Correctamente </p> 
+            <p class="alerta exito"> Creado Correctamente </p> 
         <?php elseif( intval( $resultado ) === 2 ): ?> 
-            <p class="alerta exito"> Anuncio actualizado Correctamente </p> 
+            <p class="alerta exito"> Actualizado Correctamente </p> 
         <?php elseif( intval( $resultado ) === 3 ): ?> 
-            <p class="alerta exito"> Anuncio eliminado Correctamente </p> 
+            <p class="alerta exito"> Eliminado Correctamente </p> 
         <?php endif; ?> 
 
         <a href="/admin/propiedades/crear.php" class="boton boton-verde"> Nueva Propiedad </a> 
